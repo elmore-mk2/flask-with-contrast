@@ -2,6 +2,7 @@ import sqlite3
 
 from flask import current_app
 from flask import g
+from flask.cli import with_appcontext
 
 
 def get_db():
@@ -36,6 +37,7 @@ def init_db():
         db.executescript(f.read().decode("utf8"))
 
 
+@with_appcontext
 def init_db_command():
     """Clear existing data and create new tables."""
     init_db()
