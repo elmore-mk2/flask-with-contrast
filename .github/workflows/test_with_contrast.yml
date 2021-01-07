@@ -20,6 +20,8 @@ jobs:
       - name: Setup library
         run: pip install -r requirements.txt
       - name: Populate yaml
-        run: python populate_env_vars.py
+        run: |
+        echo "${{ secrets.flaskr }}" > .env
+        python populate_env_vars.py
       - name: Execute pytest
         run: pytest

@@ -5,8 +5,6 @@ import os
 
 def main():
 
-    conf = None
-
     with open('contrast_security_templ.yml') as file:
         conf = yaml.safe_load(file)
         conf['api']['url'] = os.getenv('CONTRAST_URL')
