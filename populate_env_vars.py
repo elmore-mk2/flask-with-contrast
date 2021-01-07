@@ -14,7 +14,7 @@ def main():
 
     print(os.getenv('FLASK_APP'))
     print(os.getenv('FLASK_ENV'))
-    with open('contrast_security.yml', 'a') as file:
+    with open('contrast_security.yaml', 'a') as file:
         yaml.dump(conf, file)
 
 
