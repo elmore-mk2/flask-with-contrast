@@ -1,0 +1,25 @@
+name: flask-ci-test
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9']
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - name: Setup library
+        run: pip install -r requirements.txt
+      - name: Populate yaml
+        run: python populate_env_vars.py
+      - name: Execute pytest
+        run: pytest
