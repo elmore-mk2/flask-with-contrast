@@ -14,6 +14,8 @@ def main():
         conf['api']['service_key'] = os.getenv('CONTRAST_SERVICE_KEY')
         conf['api']['user_name'] = os.getenv('CONTRAST_USER_NAME')
 
+    print(os.getenv('FLASK_APP'))
+    print(os.getenv('FLASK_ENV'))
     with open('contrast_security.yml', 'a') as file:
         yaml.dump(conf, file)
 
