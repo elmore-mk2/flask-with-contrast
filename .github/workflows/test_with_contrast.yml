@@ -32,7 +32,7 @@ jobs:
           echo ${FLASK_APP}
           echo ${FLASK_ENV}
           python populate_env_vars.py
-      - name: init db
-        run: python -m flask init-db
+#      - name: init db
+#        run: python -m flask init-db
       - name: Execute pytest
         run: pytest
