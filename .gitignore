@@ -236,3 +236,9 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,flask
+
+contrast-agent.log
+contrast_service.log
+contrast_security.yml
+.env
+flaskr.egg-info/

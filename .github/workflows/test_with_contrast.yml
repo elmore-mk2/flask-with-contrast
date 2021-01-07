@@ -18,10 +18,19 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: Setup library
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install pipenv
       - name: Populate yaml
         run: |
-          echo "${{ secrets.flaskr }}" > .env
-          python populate_env_vars.py
+          echo "${{ secrets.FLASK_ENV }}" >> .env
+          echo "${{ secrets.CONTRAST_API_KEY }}" >> .env
+          echo "${{ secrets.CONTRAST_SERVICE_KEY }}" >> .env
+          echo "${{ secrets.CONTRAST_URL }}" >> .env
+          echo "${{ secrets.CONTRAST_USER_NAME }}" >> .env
+          echo "${{ secrets.FLASK_APP }}" >> .env
+          pipenv run populate
+      - name: init db
+        run: pipenv init_db
       - name: Execute pytest
-        run: pytest
+        run: pipenv test
