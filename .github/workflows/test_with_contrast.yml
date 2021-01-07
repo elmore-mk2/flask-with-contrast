@@ -35,8 +35,6 @@ jobs:
           echo ${FLASK_ENV}
           pipenv run populate
       - name: init db
-        run: |
-          pipenv shell
-          pipenv run init_db
+        run: pipenv run init_db
       - name: Execute pytest
         run: pipenv test
