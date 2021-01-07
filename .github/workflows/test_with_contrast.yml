@@ -20,8 +20,6 @@ jobs:
       - name: Setup library
         run: |
           pip install -r requirements.txt
-          pip install pipenv
-          pipenv sync --dev
       - name: Populate yaml
         env:
           FLASK_APP: ${{ secrets.FLASK_APP }}
@@ -33,8 +31,8 @@ jobs:
         run: |
           echo ${FLASK_APP}
           echo ${FLASK_ENV}
-          pipenv run populate
+          python populate_env_vars.py
       - name: init db
-        run: pipenv run init_db
+        run: python -m flask init-db
       - name: Execute pytest
-        run: pipenv test
+        run: pytest
