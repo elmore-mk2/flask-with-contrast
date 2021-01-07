@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+contrast-agent = "*"
+flaskr = {editable = true, path = "."}
+pytest = "*"
+werkzeug = "*"
+pyyaml = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+test = "pytest -s"
+start = "python -m flask run"
+populate = "python populate_env_vars.py"

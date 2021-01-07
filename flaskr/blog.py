@@ -42,8 +42,7 @@ def get_post(id, check_author=True):
         .execute(
             "SELECT p.id, title, body, created, author_id, username"
             " FROM post p JOIN user u ON p.author_id = u.id"
-            " WHERE p.id = ?",
-            (id,),
+            f" WHERE p.id = {id}"
         )
         .fetchone()
     )
@@ -72,10 +71,10 @@ def create():
         if error is not None:
             flash(error)
         else:
+            user_id = g.user["id"]
             db = get_db()
             db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                f"INSERT INTO post (title, body, author_id) VALUES ('{title}', '{body}', {user_id})"
             )
             db.commit()
             return redirect(url_for("blog.index"))
@@ -102,7 +101,7 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+                f"UPDATE post SET title = '{title}', body = '{body}' WHERE id = {id}"
             )
             db.commit()
             return redirect(url_for("blog.index"))
@@ -120,6 +119,6 @@ def delete(id):
     """
     get_post(id)
     db = get_db()
-    db.execute("DELETE FROM post WHERE id = ?", (id,))
+    db.execute(f"DELETE FROM post WHERE id = {id}")
     db.commit()
     return redirect(url_for("blog.index"))
