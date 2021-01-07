@@ -1,9 +1,7 @@
 import sqlite3
 
-import click
 from flask import current_app
 from flask import g
-from flask.cli import with_appcontext
 
 
 def get_db():
@@ -38,11 +36,9 @@ def init_db():
         db.executescript(f.read().decode("utf8"))
 
 
-@with_appcontext
 def init_db_command():
     """Clear existing data and create new tables."""
     init_db()
-    click.echo("Initialized the database.")
 
 
 def init_app(app):
