@@ -5,6 +5,8 @@ from flask import current_app
 from flask import g
 from flask.cli import with_appcontext
 
+import pdb
+
 
 def get_db():
     """Connect to the application's configured database. The connection
