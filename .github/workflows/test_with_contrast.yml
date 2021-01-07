@@ -23,7 +23,12 @@ jobs:
           pip install pipenv
       - name: Populate yaml
         run: |
-          echo "${{ secrets.flaskr }}" > .env
+          echo "${{ secrets.FLASK_APP }}" >> .env
+          echo "${{ secrets.FLASK_ENV }}" >> .env
+          echo "${{ secrets.CONTRAST_API_KEY }}" >> .env
+          echo "${{ secrets.CONTRAST_SERVICE_KEY }}" >> .env
+          echo "${{ secrets.CONTRAST_URL }}" >> .env
+          echo "${{ secrets.CONTRAST_USER_NAME }}" >> .env
           pipenv run populate
       - name: init db
         run: pipenv init_db
