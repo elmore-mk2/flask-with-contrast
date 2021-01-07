@@ -23,13 +23,16 @@ jobs:
           pip install pipenv
           pipenv sync --dev
       - name: Populate yaml
+        env:
+          FLASK_APP: ${{ secrets.FLASK_APP }}
+          FLASK_ENV: ${{ secrets.FLASK_ENV }}
+          CONTRAST_API_KEY: ${{ secrets.CONTRAST_API_KEY }}
+          CONTRAST_SERVICE_KEY: ${{ secrets.CONTRAST_SERVICE_KEY }}
+          CONTRAST_URL: ${{ secrets.CONTRAST_URL }}
+          CONTRAST_USER_NAME: ${{ secrets.CONTRAST_USER_NAME }}
         run: |
-          echo "$secrets.FLASK_APP" >> .env
-          echo "$secrets.FLASK_ENV" >> .env
-          echo "$secrets.CONTRAST_API_KEY" >> .env
-          echo "$secrets.CONTRAST_SERVICE_KEY" >> .env
-          echo "$secrets.CONTRAST_URL" >> .env
-          echo "$secrets.CONTRAST_USER_NAME" >> .env
+          echo ${FLASK_APP}
+          echo ${FLASK_ENV}
           pipenv run populate
       - name: init db
         run: pipenv init_db
